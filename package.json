@@ -1,0 +1,8 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:qinran0423/algorithms.git",
+  "author": "qinran0423 <1156107187@qq.com>",
+  "license": "MIT"
+}
