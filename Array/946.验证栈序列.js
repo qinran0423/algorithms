@@ -12,7 +12,7 @@
  */
 var validateStackSequences = function (pushed, popped) {
   let stack = []
-  let j = 0;
+  let j = 0
   for (const cur of pushed) {
     stack.push(cur)
     while (stack[stack.length - 1] === popped[j] && stack.length) {
