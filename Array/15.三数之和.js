@@ -23,7 +23,7 @@ var threeSum = function (nums) {
     let left = i + 1; // 左指针
     let right = nums.length - 1; //右指针
     while (left < right) {
-      const sum = nums[i] + nums[left] + nums[right] === 0
+      const sum = nums[i] + nums[left] + nums[right]
       if (right === i) {
         right--
       } else if (sum === 0) {
