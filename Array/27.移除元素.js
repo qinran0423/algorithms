@@ -40,5 +40,23 @@ var removeElement = function (nums, val) {
   }
   return left
 };
+
+
+
+var removeElement = function (nums, val) {
+  if (nums.length === 0) return 0
+  // 定义一个指针
+  let k = 0
+  // 遍历这个数组
+  for (let i = 0; i < nums.length; i++) {
+    // 如果当前的值不为val
+    if (nums[i] !== val) {
+      // 则将当前的值赋值给k的值
+      nums[k] = nums[i]
+      k++
+    }
+  }
+  return k
+};
 // @lc code=end
 
