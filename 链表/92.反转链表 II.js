@@ -19,28 +19,30 @@
  * @return {ListNode}
  */
 var reverseBetween = function (head, left, right) {
-  if (!head) return null;
-  let ret = new ListNode(null, head), pre = ret, n = right - left + 1;
+  // 定义一个哨兵元素
+  let ret = new ListNode(null, head)
+  // 最后需要返回的是ret 所以需要一个变量替换
+  let pre = ret
+  // 需要反转的个数
+  let n = right - left + 1
+  // 找到反转的起点
   while (--left) {
     pre = pre.next
   }
-
+  // 找到起点后开始反转
   pre.next = reverse(pre.next, n)
-
   return ret.next
-
-
 };
 
 
 var reverse = function (head, n) {
-  let pre = null, cur = head
+  let prev = null, cur = head
   while (n--) {
-    [cur.next, pre, cur] = [pre, cur, cur.next]
+    [cur.next, prev, cur] = [prev, cur, cur.next]
   }
-
+  // head此时已经变成了最后一个节点了， 所以他需要指向下一位，此时下一位是cur
   head.next = cur
-  return pre
+  return prev
 }
 
 
