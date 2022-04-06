@@ -17,19 +17,41 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
+// var preorderTraversal = function (root) {
+//   let arr = []
+
+//   function dfs(root) {
+//     if (!root) return root;
+//     arr.push(root.val)
+//     dfs(root.left)
+//     dfs(root.right)
+
+//   }
+//   dfs(root)
+
+//   return arr
+// };
+
 var preorderTraversal = function (root) {
-  let arr = []
+  let res = []
+  if (!root) return res;
 
-  function dfs(root) {
-    if (root === null) return
-    arr.push(root.val)
-    dfs(root.left)
-    dfs(root.right)
+  let stack = [root]
+
+  while (stack.length) {
+    // 拿出来最后一个节点
+    let cur = stack.pop()
+    // 将值放进res
+    res.push(cur.val)
+    // 如果右节点存在 在推入stack中
+    cur.right && stack.push(cur.right)
+    // 如果左节点存在 在推入stack中
+    cur.left && stack.push(cur.left)
+    // 【right, left】
   }
-  dfs(root)
-  return arr
-};
 
+  return res
 
+}
 // @lc code=end
 
