@@ -10,34 +10,32 @@
  * @return {void} Do not return anything, modify board in-place instead.
  */
 var solveSudoku = function (board) {
-  // 遍历board中的每一个值
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
-      // 如果值不是.是数字则直接跳过
+      // 说明这个节点有值 直接跳过
       if (board[i][j] !== '.') {
         continue
       }
 
-      // 否则就放置数字
+      // 这个节点没有值的话
+      // 需要给他设置值 1-9
       for (let k = 1; k <= 9; k++) {
-        // 判断数独是不是合理
         k = k.toString()
+        // 首先需要校验这个k是否满足规则
         if (isValid(board, i, j, k)) {
           board[i][j] = k
-
+          // 给下一个格子设置值
           if (solveSudoku(board)) {
             return true
           }
-
           board[i][j] = '.'
         }
-
       }
-      // 放不了 
+      // 放不了 说明 1-9之间的数放进去都有问题  则说明前面的只放的有问题
       return false
     }
   }
-  // 放完了 找到解了
+
   return true
 };
 
