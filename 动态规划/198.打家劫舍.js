@@ -9,6 +9,7 @@
  * @param {number[]} nums
  * @return {number}
  */
+//  dp[i] 下标i之前的房屋 最多可以偷取dp[i]的钱
 var rob = function (nums) {
   let dp = [nums[0], Math.max(nums[0], nums[1])]
 
