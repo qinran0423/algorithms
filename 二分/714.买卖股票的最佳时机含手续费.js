@@ -25,6 +25,7 @@ var maxProfit = function (prices, fee) {
 
     if (prices[i] > minPrice + fee) {
       ret += prices[i] - minPrice - fee
+      // TODO 为什么要 - fee?
       minPrice = prices[i] - fee
     }
   }
