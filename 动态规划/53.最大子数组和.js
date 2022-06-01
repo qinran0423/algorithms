@@ -9,17 +9,19 @@
  * @param {number[]} nums
  * @return {number}
  */
+// 以num[i]为结尾的”最大子数组和“为dp[i]
+// dp[i]有两个选择；
+// 1. 与前面相邻子数组链接，形成一个和更大的子数组
+// 2. 不与前面的子数组链接，自成一派，自己作为一个子数组
 var maxSubArray = function (nums) {
   let n = nums.length
-  if (n === 0) return 0
-  let dp = new Array(n)
-  dp[0] = nums[0]
-  dp[1] = 0
-  let res = dp[0]
+  let dp0 = nums[0]
+  let dp1 = 0
+  let res = dp0
   for (let i = 1; i < n; i++) {
-    dp[1] = Math.max(nums[i], dp[0] + nums[i])
-    dp[0] = dp[1]
-    res = Math.max(res, dp[1])
+    dp1 = Math.max(dp0 + nums[i], nums[i])
+    dp0 = dp1
+    res = Math.max(res, dp1)
   }
   return res
 };
