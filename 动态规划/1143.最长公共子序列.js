@@ -16,6 +16,7 @@
 var longestCommonSubsequence = function (text1, text2) {
   let m = text1.length
   let n = text2.length
+  //目标：s1[0..m-1] 和 s2[0..n-1] 的 lcs 长度，即 dp[m][n]
   let dp = new Array(m + 1).fill(0).map(() => {
     return new Array(n + 1).fill(0)
   })
