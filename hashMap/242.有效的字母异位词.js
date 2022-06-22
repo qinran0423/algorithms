@@ -18,8 +18,8 @@ var isAnagram = function (s, t) {
   let arr = new Array(26).fill(0)
   let base = 'a'.charCodeAt()
   for (let i = 0; i < s.length; i++) {
-    arr[s[i].charCodeAt() - base] += 1
-    arr[t[i].charCodeAt() - base] -= 1
+    arr[s.charCodeAt(i) - base] += 1
+    arr[t.charCodeAt(i) - base] -= 1
   }
 
   return arr.every(i => i === 0)
