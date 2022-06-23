@@ -10,7 +10,45 @@
  * @param {number} target
  * @return {number[][]}
  */
+// 回溯
+var fourSum1 = function (nums, target) {
+  let res = []
+  let len = nums.length
+  let tmp = []
+  nums.sort((a, b) => a - b)
+  dfs(0, 4, target)
+  function dfs(index, count, target) {
+    if (count === 0 && target === 0) {
+      res.push([...tmp])
+    }
 
+    if (len - index < count) {
+      return
+    }
+
+    if (target < count * nums[index]) {
+      return
+    }
+
+    if (target > count * nums[len - 1]) {
+      return
+    }
+
+    for (let i = index; i < len; i++) {
+      if (i > index && nums[i] === nums[i - 1]) {
+        continue
+      }
+
+      tmp.push(nums[i])
+      dfs(i + 1, count - 1, target - nums[i])
+      tmp.pop()
+    }
+  }
+
+  return res
+
+};
+// ++++++++++++++++++++++++++++++++++++++++++++++++++
 var nSumTarget = function (nums, n, start, target) {
 
   let res = []
