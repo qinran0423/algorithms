@@ -9,7 +9,59 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
+// 方法一
+var twoSumTarget = function (nums, start, target) {
+  let lo = start, hi = nums.length - 1
+  let res = []
+
+  while (lo < hi) {
+    let sum = nums[lo] + nums[hi]
+    let left = nums[lo], right = nums[hi]
+    if (sum === target) {
+      res.push([left, right])
+      while (lo < hi && nums[lo] === left) {
+        lo++
+      }
+      while (lo < hi && nums[hi] === right) {
+        hi--
+      }
+    } else if (sum > target) {
+      while (lo < hi && nums[hi] === right) {
+        hi--
+      }
+    } else if (sum < target) {
+      while (lo < hi && nums[lo] === left) {
+        lo++
+      }
+    }
+  }
+
+  return res
+}
+
 var threeSum = function (nums) {
+  nums.sort((a, b) => a - b)
+  let n = nums.length
+  let res = []
+  let target = 0
+  for (let i = 0; i < n; i++) {
+    let tuples = twoSumTarget(nums, i + 1, target - nums[i])
+    for (const tuple of tuples) {
+      tuple.push(nums[i])
+      res.push(tuple)
+    }
+
+    while (i < n - 1 && nums[i] === nums[i + 1]) {
+      i++
+    }
+  }
+
+  return res
+};
+
+// ============================================================
+// 方法二
+var threeSum1 = function (nums) {
   if (nums.length < 3) return []
   let res = []
   // 先排序
