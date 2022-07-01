@@ -16,9 +16,10 @@ var search = function (nums, target) {
     return -1
   }
 
-  let left = 0, right = n - 1
+  let left = 0,
+    right = n - 1
   while (left <= right) {
-    let mid = Math.floor((left + right) / 2)
+    let mid = left + Math.floor((right - left) / 2)
     if (nums[mid] === target) {
       return mid
     } else if (nums[mid] > target) {
@@ -31,4 +32,3 @@ var search = function (nums, target) {
   return -1
 };
 // @lc code=end
-
