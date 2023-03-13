@@ -1,43 +1,41 @@
-
-
 class Node {
   constructor(val) {
-    this.val = val
-    this.next = null
+    this.val = val;
+    this.next = null;
   }
 }
 
 function defaultEquals(a, b) {
-  return a === b
+  return a === b;
 }
 
 class LinkNodeList {
   constructor(equalsFn = defaultEquals) {
-    this.head = null
-    this.count = 0
+    this.head = null;
+    this.count = 0;
   }
 
   push(element) {
-    const node = new Node(element)
-    let current
+    const node = new Node(element);
+    let current;
     if (this.head === null) {
-      this.head = node
+      this.head = node;
     } else {
-      current = this.head
+      current = this.head;
       while (current.next) {
-        current = current.next
+        current = current.next;
       }
-      current.next = node
+      current.next = node;
     }
-    this.count++
+    this.count++;
   }
 
   remove(index) {
     if (index >= 0 && index < this.count) {
-      let current = this.head
+      let current = this.head;
       // 移除第一项
       if (index === 0) {
-        this.head = current.next
+        this.head = current.next;
       } else {
         // 1.--------
         // let prev;
@@ -47,275 +45,267 @@ class LinkNodeList {
         // }
         // prev.next = current.next
         // 2.--------
-        const prev = this.getVal(index - 1)
-        current = prev.next
-        prev.next = current.next
-
+        const prev = this.getVal(index - 1);
+        current = prev.next;
+        prev.next = current.next;
       }
-      this.count--
-      return current.val
+      this.count--;
+      return current.val;
     }
 
-    return undefined
+    return undefined;
   }
   // 查找
   getVal(index) {
     console.log(this.count);
     if (index > 0 && index <= this.count) {
-      let node = this.head
+      let node = this.head;
       for (let i = 0; i < index && node !== null; i++) {
-        node = node.next
+        node = node.next;
       }
-      return node
+      return node;
     }
-    return undefined
+    return undefined;
   }
 
   insert(ele, index) {
     if (index >= 0 && index <= this.count) {
-      const node = new Node(ele)
+      const node = new Node(ele);
       if (index === 0) {
-        const current = this.head
-        node.next = current
-        this.head = node
+        const current = this.head;
+        node.next = current;
+        this.head = node;
       } else {
-        const prev = this.getVal(index - 1)
-        node.next = prev.next
-        prev.next = node
+        const prev = this.getVal(index - 1);
+        node.next = prev.next;
+        prev.next = node;
       }
-      this.count++
-      return true
+      this.count++;
+      return true;
     }
-    return false
+    return false;
   }
 
-
   indexOf(ele) {
-    let current = this.head
+    let current = this.head;
     for (let i = 0; i < this.count && current !== null; i++) {
       if (this.defaultEquals(ele, current.val)) {
-        return i
+        return i;
       }
-      current = current.next
+      current = current.next;
     }
 
-    return -1
+    return -1;
   }
 
   size() {
-    return this.count
+    return this.count;
   }
 
   isEmpty() {
-    return this.size() === 0
+    return this.size() === 0;
   }
 
   getHead() {
-    return this.head
+    return this.head;
   }
 
   toString() {
     if (this.head === null) {
-      return ''
+      return "";
     }
-    let objString = `${this.head.val}`
-    let current = this.head.next
+    let objString = `${this.head.val}`;
+    let current = this.head.next;
     for (let i = 1; i < this.size() && current !== null; i++) {
-      objString = `${objString}=>${current.val}`
-      current = current.next
+      objString = `${objString}=>${current.val}`;
+      current = current.next;
     }
-    return objString
+    return objString;
   }
 }
 
-let linkList = new LinkNodeList()
+let linkList = new LinkNodeList();
 
-linkList.push(1)
-linkList.push(2)
-linkList.push(3)
+linkList.push(1);
+linkList.push(2);
+linkList.push(3);
 
 console.log(linkList.toString());
-
 
 //============= 双向链表 ================
 class DoublyNode extends Node {
   constructor(val, next, prev) {
-    super(val, next)
-    this.prev = prev
+    super(val, next);
+    this.prev = prev;
   }
 }
-
 
 class DoublyLinkList extends LinkNodeList {
   constructor(equalsFn = defaultEquals) {
-    super(equalsFn)
-    this.tail = undefined
+    super(equalsFn);
+    this.tail = undefined;
   }
 
   insert(ele, index) {
-
     if (index >= 0 && index <= this.count) {
-      const node = new DoublyNode(ele)
-      let current = this.head
+      const node = new DoublyNode(ele);
+      let current = this.head;
       if (index === 0) {
         if (this.head === null) {
-          this.head = node
-          this.tail = node
+          this.head = node;
+          this.tail = node;
         } else {
-          node.text = this.head
-          current.prev = node
-          this.head = node
+          node.text = this.head;
+          current.prev = node;
+          this.head = node;
         }
       } else if (index === this.count) {
-        current = this.tail
-        current.next = node
-        node.pre = current
-        this.tail = node
+        current = this.tail;
+        current.next = node;
+        node.pre = current;
+        this.tail = node;
       } else {
-        const previous = this.getVal(index - 1)
-        current = previous.next
-        node.next = current
-        current.prev = node
-        node.prev = previous
+        const previous = this.getVal(index - 1);
+        current = previous.next;
+        node.next = current;
+        current.prev = node;
+        node.prev = previous;
       }
 
-      this.count++
-      return true
+      this.count++;
+      return true;
     }
-    return false
+    return false;
   }
-
 
   remove(index) {
     if (index >= 0 && index < this.count) {
-      let current = this.head
+      let current = this.head;
       if (index === 0) {
-        this.head = current.next
+        this.head = current.next;
         if (this.count === 1) {
-          this.tail = undefined
+          this.tail = undefined;
         } else {
-          this.head.prev = undefined
+          this.head.prev = undefined;
         }
       } else if (index === this.count - 1) {
         current = this.tail;
-        this.tail = current.prev
-        this.tail.next = undefined
+        this.tail = current.prev;
+        this.tail.next = undefined;
       } else {
-        current = this.getVal(index)
-        const previous = current.prev
-        previous.next = current.next
-        current.next.prev = previous
+        current = this.getVal(index);
+        const previous = current.prev;
+        previous.next = current.next;
+        current.next.prev = previous;
       }
 
-      this.count--
-      return current.val
+      this.count--;
+      return current.val;
     }
-    return undefined
+    return undefined;
   }
 }
-
-
-
 
 // 循环链表
 class CircularLinkedList extends LinkNodeList {
   constructor(equalsFn = defaultEquals) {
-    super(equalsFn)
+    super(equalsFn);
   }
 
   insert(ele, index) {
     if (index > 0 && index <= this.count) {
-      const node = new Node(ele)
-      let current = this.head
+      const node = new Node(ele);
+      let current = this.head;
       if (index === 0) {
         if (this.head === null) {
-          this.head = node
-          node.next = this.head
+          this.head = node;
+          node.next = this.head;
         } else {
-          node.next = current
-          current = this.getVal(this.size())
-          this.head = node
-          current.next = this.head
+          node.next = current;
+          current = this.getVal(this.size());
+          this.head = node;
+          current.next = this.head;
         }
       } else {
-        const previous = this.getVal(index - 1)
-        node.next = previous.next
-        previous.next = node
+        const previous = this.getVal(index - 1);
+        node.next = previous.next;
+        previous.next = node;
       }
 
-      this.count++
-      return true
+      this.count++;
+      return true;
     }
 
-    return false
+    return false;
   }
 
   remove(index) {
     if (index >= 0 && index < this.count) {
-      let current = this.head
+      let current = this.head;
       if (index === 0) {
         if (this.size() === 1) {
-          this.head = undefined
+          this.head = undefined;
         } else {
-          const removed = this.head
-          current = this.getVal(this.size())
-          this.head = this.head.next
-          current.next = this.head
-          current = removed
+          const removed = this.head;
+          current = this.getVal(this.size());
+          this.head = this.head.next;
+          current.next = this.head;
+          current = removed;
         }
       } else {
-        const previous = this.getVal(index - 1)
-        current = previous.next
-        previous.next = current
+        const previous = this.getVal(index - 1);
+        current = previous.next;
+        previous.next = current;
       }
-      this.count--
-      return current.val
+      this.count--;
+      return current.val;
     }
-    return undefined
+    return undefined;
   }
 }
-
 
 // 有序链表
 const Compare = {
   LESS_THAN: -1,
-  BIGGER_THAN: 1
-}
-
+  BIGGER_THAN: 1,
+};
 
 function defaultCompare(a, b) {
   if (a === b) {
-    return 0
+    return 0;
   }
 
-  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
+  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN;
 }
-
 
 class SortedLinkList extends LinkNodeList {
   constructor(equalsFn = defaultEquals, compareFn = defaultCompare) {
-    super(equalsFn)
-    this.compareFn = compareFn
+    super(equalsFn);
+    this.compareFn = compareFn;
   }
 
   insert(ele, index = 0) {
     if (this.isEmpty()) {
-      return super.push(ele, 0)
+      return super.push(ele, 0);
     }
-    const pos = this.getIndexNextSortedElement(ele)
-    return super.push(ele, pos)
+    const pos = this.getIndexNextSortedElement(ele);
+    return super.push(ele, pos);
   }
 
   getIndexNextSortedElement(ele) {
-    let current = this.head
-    let i = 0
+    let current = this.head;
+    let i = 0;
     for (; i < this.size() && current; i++) {
-      const comp = this.compareFn(ele, current.val)
+      const comp = this.compareFn(ele, current.val);
       if (comp === Compare.LESS_THAN) {
-        return i
+        return i;
       }
-      current = current.next
+      current = current.next;
     }
-    return i
+    return i;
   }
 }
+
+module.export = {
+  LinkNodeList,
+};
